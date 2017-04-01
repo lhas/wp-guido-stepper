@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Guido Stepper
  * Plugin URI:        http://0e1dev.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Plugin writted for NHCOL to work as image slider with a dynamic form at the end.
  * Version:           1.0.0
  * Author:            lhas
  * Author URI:        http://0e1dev.com

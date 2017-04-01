@@ -100,4 +100,16 @@ class Wp_Guido_Stepper_Admin {
 
 	}
 
+	public function register_menu_pages() {
+    add_menu_page(
+        __( 'Guido Stepper', 'textdomain' ),
+        'Guido Stepper',
+        'manage_options',
+        'myplugin/myplugin-admin.php',
+        '',
+        'dashicons-chart-pie',
+        999
+    );
+	}
+
 }
