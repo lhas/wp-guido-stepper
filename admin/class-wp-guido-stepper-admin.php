@@ -102,7 +102,7 @@ class Wp_Guido_Stepper_Admin {
 
 	public function register_menu_pages() {
     add_menu_page(
-        __( 'Guido Stepper', 'textdomain' ),
+        __( 'Guido Stepper', 'wp-guido-stepper' ),
         'Guido Stepper',
         'manage_options',
         'wp-guido-stepper/admin/pages/main.php',
@@ -110,6 +110,9 @@ class Wp_Guido_Stepper_Admin {
         'dashicons-chart-pie',
         999
     );
+		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Input Forms', 'Input Forms', 'manage_options', 'wp-guido-stepper/admin/pages/input-forms.php', '' );
+		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Slides', 'Slides', 'manage_options', 'wp-guido-stepper/admin/pages/slides.php', '' );
+		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Registrations', 'Registrations', 'manage_options', 'wp-guido-stepper/admin/pages/registrations.php', '' );
 	}
 
 }
