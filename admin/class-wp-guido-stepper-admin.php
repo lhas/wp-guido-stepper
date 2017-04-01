@@ -97,6 +97,18 @@ class Wp_Guido_Stepper_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-guido-stepper-admin.js', array( 'jquery' ), $this->version, false );
+		
+		wp_localize_script(
+			$this->plugin_name,
+			'odinAdminParams',
+			array(
+				'galleryTitle'  => __( 'Add images in gallery', 'odin' ),
+				'galleryButton' => __( 'Add in gallery', 'odin' ),
+				'galleryRemove' => __( 'Remove image', 'odin' ),
+				'uploadTitle'   => __( 'Choose a file', 'odin' ),
+				'uploadButton'  => __( 'Add file', 'odin' ),
+			)
+		);
 
 	}
 	
@@ -114,22 +126,36 @@ class Wp_Guido_Stepper_Admin {
 				'supports' => array('title')
 			]
 		);
+		register_post_type('guido_stepper_slides',
+			[
+				'labels' => [
+					'name' => __('Guido Stepper Slides'),
+					'singular_name' => __('Guido Stepper Slide'),
+				],
+				'public' => true,
+				'has_archive' => false,
+				'rewrite' => ['slug' => 'stepper-slides'],
+				'menu_position' => 1000,
+				'supports' => array('title')
+			]
+		);
 	}
 
 	public function register_custom_fields() {
-		$videos_metabox = new Odin_Metabox(
+		$inputs_metabox = new Odin_Metabox(
 				'input_settings',
 				'Input Settings',
 				'guido_stepper_inputs',
 				'normal',
 				'high'
 		);
-		$videos_metabox->set_fields(
+		$inputs_metabox->set_fields(
 			array(
 				array(
 					'id'          => 'type',
 					'label'       => __( 'Type', 'wp-guido-stepper' ),
 					'type'        => 'select',
+					'add_column'  => true,
 					'options'       => array(
 							'text'   => 'Text',
 							'textarea'   => 'Textarea',
@@ -140,6 +166,27 @@ class Wp_Guido_Stepper_Admin {
 				)
 			)
 		);
+		$slides_metabox = new Odin_Metabox(
+				'slide_settings',
+				'Slide Settings',
+				'guido_stepper_slides',
+				'normal',
+				'high'
+		);
+		
+		$slides_limit = 10;
+		$slides_fields = [];
+
+		for($i = 1; $i <= $slides_limit; $i++) {
+			$slides_fields[] = array(
+				'id'          => 'slide_' . $i, // Obrigatório
+				'label'       => 'Slide #' . $i, // Obrigatório
+				'type'        => 'image_plupload', // Obrigatório
+			);
+		}
+
+		$slides_metabox->set_fields($slides_fields);
+
 	}
 
 	public function register_menu_pages() {
