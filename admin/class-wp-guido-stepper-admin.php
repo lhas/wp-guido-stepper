@@ -105,7 +105,7 @@ class Wp_Guido_Stepper_Admin {
         __( 'Guido Stepper', 'textdomain' ),
         'Guido Stepper',
         'manage_options',
-        'myplugin/myplugin-admin.php',
+        'wp-guido-stepper/admin/pages/main.php',
         '',
         'dashicons-chart-pie',
         999
