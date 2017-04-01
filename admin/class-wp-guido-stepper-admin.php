@@ -110,8 +110,35 @@ class Wp_Guido_Stepper_Admin {
 				'public' => true,
 				'has_archive' => false,
 				'rewrite' => ['slug' => 'stepper-inputs'],
-				'menu_position' => 1000
+				'menu_position' => 1000,
+				'supports' => array('title')
 			]
+		);
+	}
+
+	public function register_custom_fields() {
+		$videos_metabox = new Odin_Metabox(
+				'input_settings',
+				'Input Settings',
+				'guido_stepper_inputs',
+				'normal',
+				'high'
+		);
+		$videos_metabox->set_fields(
+			array(
+				array(
+					'id'          => 'type',
+					'label'       => __( 'Type', 'wp-guido-stepper' ),
+					'type'        => 'select',
+					'options'       => array(
+							'text'   => 'Text',
+							'textarea'   => 'Textarea',
+							'email'   => 'E-mail',
+							'tel'   => 'Phone',
+							'number'   => 'Number'
+					)
+				)
+			)
 		);
 	}
 
