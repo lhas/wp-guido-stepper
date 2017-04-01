@@ -99,6 +99,21 @@ class Wp_Guido_Stepper_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-guido-stepper-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+	
+	public function register_post_types() {
+		register_post_type('guido_stepper_inputs',
+			[
+				'labels' => [
+					'name' => __('Guido Stepper Inputs'),
+					'singular_name' => __('Guido Stepper Input'),
+				],
+				'public' => true,
+				'has_archive' => false,
+				'rewrite' => ['slug' => 'stepper-inputs'],
+				'menu_position' => 1000
+			]
+		);
+	}
 
 	public function register_menu_pages() {
     add_menu_page(
@@ -110,9 +125,6 @@ class Wp_Guido_Stepper_Admin {
         'dashicons-chart-pie',
         999
     );
-		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Input Forms', 'Input Forms', 'manage_options', 'wp-guido-stepper/admin/pages/input-forms.php', '' );
-		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Slides', 'Slides', 'manage_options', 'wp-guido-stepper/admin/pages/slides.php', '' );
-		add_submenu_page( 'wp-guido-stepper/admin/pages/main.php', 'Registrations', 'Registrations', 'manage_options', 'wp-guido-stepper/admin/pages/registrations.php', '' );
 	}
 
 }
