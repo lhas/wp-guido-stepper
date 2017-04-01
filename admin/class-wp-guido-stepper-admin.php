@@ -113,7 +113,7 @@ class Wp_Guido_Stepper_Admin {
 	}
 	
 	public function register_post_types() {
-		register_post_type('guido_stepper_inputs',
+		register_post_type('gs_inputs',
 			[
 				'labels' => [
 					'name' => __('Guido Stepper Inputs'),
@@ -126,7 +126,7 @@ class Wp_Guido_Stepper_Admin {
 				'supports' => array('title')
 			]
 		);
-		register_post_type('guido_stepper_slides',
+		register_post_type('gs_slides',
 			[
 				'labels' => [
 					'name' => __('Guido Stepper Slides'),
@@ -137,6 +137,23 @@ class Wp_Guido_Stepper_Admin {
 				'rewrite' => ['slug' => 'stepper-slides'],
 				'menu_position' => 1000,
 				'supports' => array('title')
+			]
+		);
+		register_post_type('gs_registrations',
+			[
+				'labels' => [
+					'name' => __('Guido Stepper Registrations'),
+					'singular_name' => __('Guido Stepper Registration'),
+				],
+				'public' => true,
+				'has_archive' => false,
+				'rewrite' => ['slug' => 'stepper-registration'],
+				'menu_position' => 1000,
+				'supports' => array('title'),
+				'capabilities' => array(
+					'create_posts' => 'do_not_allow', // false < WP 4.5, credit @Ewout
+				),
+				'map_meta_cap' => false,
 			]
 		);
 	}
