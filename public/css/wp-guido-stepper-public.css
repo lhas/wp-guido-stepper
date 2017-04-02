@@ -76,3 +76,14 @@
   font-size: 40px;
   font-weight: bold;
 }
+.form-slide {
+  position: relative;
+}
+.guido-stepper-slide.form-slide .gs-loading {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  margin-left: -40px;
+  margin-top: -40px;
+  display: none;
+}

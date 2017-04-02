@@ -59,6 +59,8 @@
 
         <button type="submit" class="guido-stepper-submit-button">Submit</button>
       </form>
+
+      <img src="<?php echo plugin_dir_url(__FILE__) . '/../../img/loading.svg'; ?>" class="gs-loading" alt="">
     </div> <!-- .form-slide -->
     <div class="guido-stepper-slide thank-you-slide">
       <h2>Thank you</h2>

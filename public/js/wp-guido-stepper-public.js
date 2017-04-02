@@ -33,7 +33,12 @@
 					values: values,
 					form: $(this).serializeArray()
 				};
+
+				$(this).hide();
+				$(guidoStepper).find('.gs-loading').show();
 				$.post(ajax_object.ajax_url, data, function(response) {
+					$(guidoStepper).find('.gs-loading').hide();
+					$(guidoStepper).find('.guido-stepper-form').show();
 					$(guidoStepper).slick('slickNext');
 				});
 				return false;
