@@ -46,8 +46,9 @@
           $images[] = $image;
         }
 
+        $index = preg_replace('/\D/', '', $k);
         $slide_slides[] = [
-          'headline' => $k,
+          'headline' => get_post_meta($slide->ID, 'title_' . $index, true),
           'images' => $images,
         ];
       }
@@ -80,12 +81,12 @@
       ?>
         <div class="form-slide-input">
           <label><?php echo $input->post_title; ?></label>
-          <input type="<?php echo get_post_meta($input->ID, 'type'); ?>" placeholder="<?php echo $input->post_title; ?>" />
+          <input type="<?php echo get_post_meta($input->ID, 'type'); ?>" name="<?php echo $input->post_title; ?>" placeholder="<?php echo $input->post_title; ?>" />
         </div> <!-- .form-slide-input -->
       <?php endforeach; ?>
 
       <button type="button" class="guido-stepper-submit-button">Submit</button>
-    </div>
+    </div> <!-- .form-slide -->
     <div class="guido-stepper-slide thank-you-slide">
       <h2>Thank you</h2>
     </div>
