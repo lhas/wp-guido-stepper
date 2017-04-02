@@ -57,16 +57,38 @@
 
   <div class="guido-stepper">
     <?php foreach($slide_slides as $slide_slide) : ?>
-    <div>
+    <div class="guido-stepper-slide">
       <h2><?php echo $slide_slide['headline']; ?></h2>
 
       <?php foreach($slide_slide['images'] as $image) : ?>
-      <a href="#" style="width: 100px; height: 100px; display: inline-block;">
+      <a href="#" class="guido-stepper-slide-item" style="width: 100px; height: 100px; display: inline-block;">
         <img src="<?php echo $image; ?>" style="width: 100%;" />
       </a>
       <?php endforeach; ?>
     </div>
     <?php endforeach; ?>
+    <div class="guido-stepper-slide form-slide">
+      <h2>Form Slide</h2>
+
+      <?php
+        $inputs = new WP_Query([
+          'post_type' => 'gs_inputs',
+          'limit' => 9999,
+        ]);
+
+        foreach($inputs->posts as $input) :
+      ?>
+        <div class="form-slide-input">
+          <label><?php echo $input->post_title; ?></label>
+          <input type="<?php echo get_post_meta($input->ID, 'type'); ?>" placeholder="<?php echo $input->post_title; ?>" />
+        </div> <!-- .form-slide-input -->
+      <?php endforeach; ?>
+
+      <button type="button" class="guido-stepper-submit-button">Submit</button>
+    </div>
+    <div class="guido-stepper-slide thank-you-slide">
+      <h2>Thank you</h2>
+    </div>
   </div> <!-- .guido-stepper -->
   <?php endif; ?>
 
