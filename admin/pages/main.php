@@ -32,6 +32,8 @@
 
   <h1>Shortcodes</h1>
 
+  <p>Here will display all shortcodes available for each slide:</p>
+
   <?php foreach($slides->posts as $slide): ?>
     <h2><?php echo $slide->post_title; ?></h2>
     <textarea style="width: 100%; height: 40px; line-height: 30px; resize: none;" onClick="this.select()">[stepper name="<?php echo $slide->post_title; ?>"]</textarea>

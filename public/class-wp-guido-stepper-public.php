@@ -138,6 +138,27 @@ class Wp_Guido_Stepper_Public {
 
 			add_post_meta($post_id, 'slide_values', json_encode($values));
 		}
+		
+		$message = '';
+
+		$message .= '<strong>Slide</strong>';
+		$message .= '<p>' . $slide . '</p>';
+
+		foreach($form as $input) {
+			$tmp = new WP_Query(['post_type' => 'gs_inputs', 'p' => $input['name'] ]);
+
+			$message .= '<strong>' . $tmp->posts[0]->post_title . '</strong>';
+			$message .= '<p>' . $input['value'] .'</p>';
+		}
+
+		foreach($values as $value) {
+			$message .= '<strong>' . $value['headline'] . '</strong>';
+			$message .= '<p>' . $value['value'] . '</p>';
+		}
+
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+
+		wp_mail($admin_email, '[Slide] Form Submit', $message, $headers);
 
 		wp_die();
 	}
