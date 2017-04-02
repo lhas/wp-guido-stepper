@@ -1,4 +1,57 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+.guido-stepper {
+  display: inline-block;
+  width: 100%;
+  box-shadow: 0 0 9px 0 rgba(0,0,0,.3);
+  border-radius: 10px;
+  padding: 10px;
+}
+.form-slide-input {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.guido-stepper-headline {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+.guido-stepper-slide-item {
+  float: left;
+  margin-left: 15px;
+  margin-right: 15px;
+  box-shadow: none !important;
+  width: 150px;
+}
+.guido-stepper-slide-item img {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  box-shadow: 0 0 5px rgba(0,0,0,.5) !important;
+}
+.form-slide-input {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.guido-stepper-submit-button {
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+.guido-stepper-slide-item-title {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  color: #FFF;
+  background: rgba(128,147,1,.84);
+  word-break: break-all;
+  font-size: 13px;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,.5) !important;
+}
+.guido-stepper-slide-item:hover 
+.guido-stepper-slide-item-title {
+  opacity: 0.7;
+}
+.guido-stepper-slide-item:active 
+.guido-stepper-slide-item-title {
+  opacity: 0.9;
+}

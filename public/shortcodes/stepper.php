@@ -10,8 +10,10 @@
       $images = [];
 
       foreach($images_id as $image_id) {
-        $image = wp_get_attachment_url($image_id);
-        $images[] = $image;
+        $images[] = [
+          'url' => wp_get_attachment_url($image_id),
+          'title' => get_the_title($image_id),
+        ];
       }
 
       $index = preg_replace('/\D/', '', $k);
@@ -26,17 +28,18 @@
 <div class="guido-stepper">
   <?php foreach($slide_slides as $slide_slide) : ?>
   <div class="guido-stepper-slide">
-    <h2><?php echo $slide_slide['headline']; ?></h2>
+    <h2 class="guido-stepper-headline"><?php echo $slide_slide['headline']; ?></h2>
 
     <?php foreach($slide_slide['images'] as $image) : ?>
-    <a href="#" class="guido-stepper-slide-item" style="width: 100px; height: 100px; display: inline-block;">
-      <img src="<?php echo $image; ?>" style="width: 100%;" />
+    <a href="#" class="guido-stepper-slide-item" data-headline="<?php echo $slide_slide['headline']; ?>" data-value="<?php echo $image['title']; ?>">
+      <img src="<?php echo $image['url']; ?>" />
+      <span class="guido-stepper-slide-item-title"><?php echo $image['title']; ?></span>
     </a>
     <?php endforeach; ?>
   </div>
   <?php endforeach; ?>
   <div class="guido-stepper-slide form-slide">
-    <h2>Form Slide</h2>
+    <h2 class="guido-stepper-headline">Form Slide</h2>
 
     <form class="guido-stepper-form">
       <?php
