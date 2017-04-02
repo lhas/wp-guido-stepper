@@ -107,7 +107,7 @@ class Wp_Guido_Stepper_Public {
 		function stepper_func($atts) {
 			ob_start();
 			$slide_name = $atts['name'];
-			include_once('shortcodes/stepper.php');
+			include('shortcodes/stepper.php');
 			$output = ob_get_clean();
 			return $output;
 		}
@@ -158,7 +158,7 @@ class Wp_Guido_Stepper_Public {
 
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 
-		wp_mail($admin_email, '[Slide] Form Submit', $message, $headers);
+		wp_mail($admin_email,  '[' . $slide . '] Submit', $message, $headers);
 
 		wp_die();
 	}
