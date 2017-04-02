@@ -28,11 +28,13 @@
 
   <?php
     $slides = new WP_Query(['post_type' => 'gs_slides']);
-    $slide = @$slides->posts[0];
   ?>
 
-  <?php if(!empty($slide)) : ?>
-  <h1>Demo</h1>
-  <?php endif; ?>
+  <h1>Shortcodes</h1>
+
+  <?php foreach($slides->posts as $slide): ?>
+    <h2><?php echo $slide->post_title; ?></h2>
+    <textarea style="width: 100%; height: 40px; line-height: 30px; resize: none;" onClick="this.select()">[stepper name="<?php echo $slide->post_title; ?>"]</textarea>
+  <?php endforeach; ?>
 
 </div>
