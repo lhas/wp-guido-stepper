@@ -100,6 +100,7 @@ class Wp_Guido_Stepper_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-guido-stepper-public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name . '_slick', plugin_dir_url( __FILE__ ) . '../vendors/slick-1.6.0/slick/slick.min.js', array( 'jquery' ), $this->version, false );
 
+		wp_localize_script( $this->plugin_name, 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), ) );
 	}
 
 	public function register_shortcodes() {
@@ -112,6 +113,33 @@ class Wp_Guido_Stepper_Public {
 		}
 
 		add_shortcode('stepper', 'stepper_func');
+	}
+
+	public function ajax_stepper_submit() {
+		$slide = $_POST['slide'];
+		$values = $_POST['values'];
+		$form = $_POST['form'];
+		$admin_email = get_bloginfo('admin_email');
+
+		$post_id = wp_insert_post(array (
+				'post_type' => 'gs_registrations',
+				'post_title' => date('d/m/Y H:i:s'),
+				'post_status' => 'publish',
+				'comment_status' => 'closed',
+				'ping_status' => 'closed',
+		));
+
+		if ($post_id) {
+			add_post_meta($post_id, 'belongs_to_slide', $slide);
+
+			foreach($form as $input) {
+				add_post_meta($post_id, 'input_' . $input['name'], $input['value']);
+			}
+
+			add_post_meta($post_id, 'slide_values', json_encode($values));
+		}
+
+		wp_die();
 	}
 
 }

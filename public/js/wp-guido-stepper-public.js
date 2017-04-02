@@ -24,7 +24,15 @@
 		});
 
 		$('.guido-stepper-form').on('submit', function() {
-			console.log(values);
+			var data = {
+				action: 'stepper_submit',
+				slide: $(this).data('slide'),
+				values: values,
+				form: $(this).serializeArray()
+			};
+			$.post(ajax_object.ajax_url, data, function(response) {
+				console.log(response);
+			});
 			$('.guido-stepper').slick('slickNext');
 			return false;
 		});

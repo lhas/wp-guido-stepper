@@ -41,7 +41,7 @@
   <div class="guido-stepper-slide form-slide">
     <h2 class="guido-stepper-headline">Form Slide</h2>
 
-    <form class="guido-stepper-form">
+    <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
       <?php
         $inputs = new WP_Query([
           'post_type' => 'gs_inputs',
@@ -52,7 +52,7 @@
       ?>
         <div class="form-slide-input">
           <label><?php echo $input->post_title; ?></label>
-          <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->post_title; ?>" placeholder="<?php echo $input->post_title; ?>" />
+          <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->ID; ?>" placeholder="<?php echo $input->post_title; ?>" />
         </div> <!-- .form-slide-input -->
       <?php endforeach; ?>
 

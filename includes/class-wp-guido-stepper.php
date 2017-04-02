@@ -161,6 +161,7 @@ class Wp_Guido_Stepper {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_menu_pages' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_custom_fields' );
+		$this->loader->add_filter( 'admin_post_column_value_gs_registrations_slide_values', $plugin_admin, 'slide_values_column_values' );
 
 	}
 
@@ -177,6 +178,7 @@ class Wp_Guido_Stepper {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_ajax_stepper_submit', $plugin_public, 'ajax_stepper_submit' );
 
 		$plugin_public->register_shortcodes();
 	}
