@@ -102,4 +102,15 @@ class Wp_Guido_Stepper_Public {
 
 	}
 
+	public function register_shortcodes() {
+		function stepper_func($atts) {
+			ob_start();
+			include_once('shortcodes/stepper.php');
+			$output = ob_get_clean();
+			return $output;
+		}
+
+		add_shortcode('stepper', 'stepper_func');
+	}
+
 }
