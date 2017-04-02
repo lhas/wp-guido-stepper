@@ -74,6 +74,7 @@ class Wp_Guido_Stepper_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-guido-stepper-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '_slick', plugin_dir_url( __FILE__ ) . '../vendors/slick-1.6.0/slick/slick.css', array(), $this->version, 'all' );
 
 	}
 
@@ -97,6 +98,7 @@ class Wp_Guido_Stepper_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-guido-stepper-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '_slick', plugin_dir_url( __FILE__ ) . '../vendors/slick-1.6.0/slick/slick.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 

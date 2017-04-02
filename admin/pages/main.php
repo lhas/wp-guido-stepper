@@ -24,4 +24,50 @@
       </div>
     </div>
   </div>
+
+
+  <?php
+    $slides = new WP_Query(['post_type' => 'gs_slides']);
+    $slide = @$slides->posts[0];
+  ?>
+
+  <?php if(!empty($slide)) : ?>
+  <?php
+    $slide_meta = get_post_meta($slide->ID, '');
+    $slide_slides = [];
+
+    foreach($slide_meta as $k => $v) {
+      if(preg_match('/slide\_/', $k)) {
+        $images_id = explode(',', $v[0]);
+        $images = [];
+
+        foreach($images_id as $image_id) {
+          $image = wp_get_attachment_url($image_id);
+          $images[] = $image;
+        }
+
+        $slide_slides[] = [
+          'headline' => $k,
+          'images' => $images,
+        ];
+      }
+    }
+  ?>
+  <h1>Demo</h1>
+
+  <div class="guido-stepper">
+    <?php foreach($slide_slides as $slide_slide) : ?>
+    <div>
+      <h2><?php echo $slide_slide['headline']; ?></h2>
+
+      <?php foreach($slide_slide['images'] as $image) : ?>
+      <a href="#" style="width: 100px; height: 100px; display: inline-block;">
+        <img src="<?php echo $image; ?>" style="width: 100%;" />
+      </a>
+      <?php endforeach; ?>
+    </div>
+    <?php endforeach; ?>
+  </div> <!-- .guido-stepper -->
+  <?php endif; ?>
+
 </div>

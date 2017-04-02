@@ -74,6 +74,7 @@ class Wp_Guido_Stepper_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-guido-stepper-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '_slick', plugin_dir_url( __FILE__ ) . '../vendors/slick-1.6.0/slick/slick.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +97,14 @@ class Wp_Guido_Stepper_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_media();
+		wp_enqueue_script( 'jquery-ui-sortable' );
+
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-guido-stepper-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '_slick', plugin_dir_url( __FILE__ ) . '../vendors/slick-1.6.0/slick/slick.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '_public', plugin_dir_url( __FILE__ ) . '../public/js/wp-guido-stepper-public.js', array( 'jquery' ), $this->version, false );
 		
 		wp_localize_script(
 			$this->plugin_name,
