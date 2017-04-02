@@ -13,7 +13,7 @@
 		return false;
 	 });
 
-	 $('.guido-stepper-submit-button').on('click', function() {
+	 $('.guido-stepper-form').on('submit', function() {
 		$('.guido-stepper').slick('slickNext');
 		return false;
 	 });

@@ -38,21 +38,23 @@
   <div class="guido-stepper-slide form-slide">
     <h2>Form Slide</h2>
 
-    <?php
-      $inputs = new WP_Query([
-        'post_type' => 'gs_inputs',
-        'limit' => 9999,
-      ]);
+    <form class="guido-stepper-form">
+      <?php
+        $inputs = new WP_Query([
+          'post_type' => 'gs_inputs',
+          'limit' => 9999,
+        ]);
 
-      foreach($inputs->posts as $input) :
-    ?>
-      <div class="form-slide-input">
-        <label><?php echo $input->post_title; ?></label>
-        <input type="<?php echo get_post_meta($input->ID, 'type'); ?>" name="<?php echo $input->post_title; ?>" placeholder="<?php echo $input->post_title; ?>" />
-      </div> <!-- .form-slide-input -->
-    <?php endforeach; ?>
+        foreach($inputs->posts as $input) :
+      ?>
+        <div class="form-slide-input">
+          <label><?php echo $input->post_title; ?></label>
+          <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->post_title; ?>" placeholder="<?php echo $input->post_title; ?>" />
+        </div> <!-- .form-slide-input -->
+      <?php endforeach; ?>
 
-    <button type="button" class="guido-stepper-submit-button">Submit</button>
+      <button type="submit" class="guido-stepper-submit-button">Submit</button>
+    </form>
   </div> <!-- .form-slide -->
   <div class="guido-stepper-slide thank-you-slide">
     <h2>Thank you</h2>
