@@ -159,10 +159,16 @@ class Wp_Guido_Stepper_Admin {
 	}
 
 	public function register_custom_fields() {
+		$this->input_fields();
+		$this->slide_fields();
+		$this->registration_fields();
+	}
+
+	public function input_fields() {
 		$inputs_metabox = new Odin_Metabox(
 				'input_settings',
 				'Input Settings',
-				'guido_stepper_inputs',
+				'gs_inputs',
 				'normal',
 				'high'
 		);
@@ -183,10 +189,13 @@ class Wp_Guido_Stepper_Admin {
 				)
 			)
 		);
+	}
+
+	public function slide_fields() {
 		$slides_metabox = new Odin_Metabox(
 				'slide_settings',
 				'Slide Settings',
-				'guido_stepper_slides',
+				'gs_slides',
 				'normal',
 				'high'
 		);
@@ -203,7 +212,58 @@ class Wp_Guido_Stepper_Admin {
 		}
 
 		$slides_metabox->set_fields($slides_fields);
+	}
 
+	public function registration_fields() {
+		// 0) Initialize registration metabox
+		$registration_metabox = new Odin_Metabox(
+				'registration_settings',
+				'Registration Settings',
+				'gs_registrations',
+				'normal',
+				'high'
+		);
+		$registration_fields = [];
+
+		// 1) Get all slides
+		$slides = new WP_Query([
+			'post_type' => 'gs_slides',
+			'limit' => 9999
+		]);
+
+		// 2) Get all inputs
+		$inputs = new WP_Query([
+			'post_type' => 'gs_inputs',
+			'limit' => 9999
+		]);
+
+		// 3) Registrate one field to set relationship between registration and slide
+		$options = [];
+
+		foreach($slides->posts as $slide) {
+			$options[$slide->ID] = $slide->post_title;
+		}
+
+		$registration_fields[] = [
+			'id' => 'belongs_to_slide',
+			'label' => 'Belongs to Slide',
+			'type' => 'select',
+			'options' => $options,
+			'add_column'  => true,
+		];
+
+		// 4) Iterate over inputs and set one display field for each
+		foreach($inputs->posts as $input) {
+			$registration_fields[] = [
+				'id' => 'input_' . $input->ID,
+				'label' => $input->post_title,
+				'type' => 'text',
+				'add_column'  => true,
+			];
+		}
+
+		// 5) Set fields for registration metabox
+		$registration_metabox->set_fields($registration_fields);
 	}
 
 	public function register_menu_pages() {
