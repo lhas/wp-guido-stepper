@@ -1,5 +1,4 @@
 <?php
-  $slide_name = 'Evaluation Slide';
   $slide = get_page_by_title($slide_name, OBJECT, 'gs_slides');
 
   $slide_meta = get_post_meta($slide->ID, '');

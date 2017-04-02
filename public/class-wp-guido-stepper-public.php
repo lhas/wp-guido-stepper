@@ -105,6 +105,7 @@ class Wp_Guido_Stepper_Public {
 	public function register_shortcodes() {
 		function stepper_func($atts) {
 			ob_start();
+			$slide_name = $atts['name'];
 			include_once('shortcodes/stepper.php');
 			$output = ob_get_clean();
 			return $output;
