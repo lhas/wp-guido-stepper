@@ -292,7 +292,7 @@ class Wp_Guido_Stepper_Admin {
         __( 'Guido Stepper', 'wp-guido-stepper' ),
         'Guido Stepper',
         'manage_options',
-        'wp-guido-stepper/admin/pages/main.php',
+        dirname(__FILE__) . '/pages/main.php',
         '',
         'dashicons-chart-pie',
         999
