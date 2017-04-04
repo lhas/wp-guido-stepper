@@ -17,9 +17,9 @@
           </ul>
         </div>
         <div class="welcome-panel-column" style="width: 64%;">
-          <a href="#" class="button button-primary button-hero load-customize hide-if-no-customize">Input Forms</a>
-          <a href="#" class="button button-primary button-hero load-customize hide-if-no-customize">Slides</a>
-          <a href="#" class="button button-primary button-hero load-customize hide-if-no-customize">Registrations</a>
+          <a href="<?php echo admin_url('edit.php?post_type=gs_inputs'); ?>" class="button button-primary button-hero load-customize hide-if-no-customize">Input Forms</a>
+          <a href="<?php echo admin_url('edit.php?post_type=gs_slides'); ?>" class="button button-primary button-hero load-customize hide-if-no-customize">Slides</a>
+          <a href="<?php echo admin_url('edit.php?post_type=gs_registrations'); ?>" class="button button-primary button-hero load-customize hide-if-no-customize">Registrations</a>
         </div>
       </div>
     </div>
