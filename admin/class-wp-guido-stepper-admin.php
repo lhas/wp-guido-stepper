@@ -166,6 +166,12 @@ class Wp_Guido_Stepper_Admin {
 		);
 	}
 
+	public function remove_post_type_menu() {
+		remove_menu_page( 'edit.php?post_type=gs_inputs' );
+		remove_menu_page( 'edit.php?post_type=gs_slides' );
+		remove_menu_page( 'edit.php?post_type=gs_registrations' );
+	}
+
 	public function register_custom_fields() {
 		$this->input_fields();
 		$this->slide_fields();
@@ -296,6 +302,30 @@ class Wp_Guido_Stepper_Admin {
         '',
         'dashicons-chart-pie',
         999
+    );
+    add_submenu_page(
+        dirname(__FILE__) . '/pages/main.php',
+        'Inputs',
+        'Inputs',
+        'manage_options',
+        'edit.php?post_type=gs_inputs',
+        ''
+    );
+    add_submenu_page(
+        dirname(__FILE__) . '/pages/main.php',
+        'Slides',
+        'Slides',
+        'manage_options',
+        'edit.php?post_type=gs_slides',
+        ''
+    );
+    add_submenu_page(
+        dirname(__FILE__) . '/pages/main.php',
+        'Registrations',
+        'Registrations',
+        'manage_options',
+        'edit.php?post_type=gs_registrations',
+        ''
     );
 	}
 
