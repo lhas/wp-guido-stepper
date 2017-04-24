@@ -213,8 +213,15 @@ class Wp_Guido_Stepper_Admin {
 
 	public function slide_fields() {
 		$slides_metabox = new Odin_Metabox(
-				'slide_settings',
-				'Slide Settings',
+				'slides',
+				'Slides',
+				'gs_slides',
+				'normal',
+				'high'
+		);
+		$settings_metabox = new Odin_Metabox(
+				'settings',
+				'Settings',
 				'gs_slides',
 				'normal',
 				'high'
@@ -222,8 +229,14 @@ class Wp_Guido_Stepper_Admin {
 		
 		$slides_limit = 10;
 		$slides_fields = [];
+		$settings_fields = [];
 
 		for($i = 1; $i <= $slides_limit; $i++) {
+			$slides_fields[] = array(
+				'id'          => 'background_' . $i, // Obrigatório
+				'label'       => 'Background #' . $i, // Obrigatório
+				'type'        => 'color', // Obrigatório
+			);
 			$slides_fields[] = array(
 				'id'          => 'title_' . $i, // Obrigatório
 				'label'       => 'Headline #' . $i, // Obrigatório
@@ -240,8 +253,63 @@ class Wp_Guido_Stepper_Admin {
 				'type'        => 'image_plupload', // Obrigatório
 			);
 		}
+	
+		$settings_fields[] = array(
+			'id'          => 'to', // Obrigatório
+			'label'       => 'To', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => 'submit_button_background', // Obrigatório
+			'label'       => 'Submit Button - Background Color', // Obrigatório
+			'type'        => 'color', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => 'submit_button_color', // Obrigatório
+			'label'       => 'Submit Button - Text Color', // Obrigatório
+			'type'        => 'color', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_headline', // Obrigatório
+			'label'       => '1st Form - Headline', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_subtitle', // Obrigatório
+			'label'       => '1st Form - Subtitle', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_submit', // Obrigatório
+			'label'       => '1st Form - Submit Text', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_headline', // Obrigatório
+			'label'       => '2nd Form - Headline', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_subtitle', // Obrigatório
+			'label'       => '2nd Form - Subtitle', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_submit', // Obrigatório
+			'label'       => '2nd Form - Submit Text', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
 
 		$slides_metabox->set_fields($slides_fields);
+		$settings_metabox->set_fields($settings_fields);
 	}
 
 	public function registration_fields() {
