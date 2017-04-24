@@ -36,7 +36,7 @@
 
   <?php foreach($slides->posts as $slide): ?>
     <h2><?php echo $slide->post_title; ?></h2>
-    <textarea style="width: 100%; height: 40px; line-height: 30px; resize: none;" onClick="this.select()">[stepper name="<?php echo $slide->post_title; ?>" to="example@email.com" submit_button_background="#222" submit_button_color="#FFF" 1st_slide_submit="Send Data" 2nd_slide_submit="Submit Data"]</textarea>
+    <textarea style="width: 100%; height: 40px; line-height: 30px; resize: none;" onClick="this.select()">[stepper name="<?php echo $slide->post_title; ?>"]</textarea>
   <?php endforeach; ?>
 
 </div>

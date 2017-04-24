@@ -18,6 +18,7 @@
 
       $index = preg_replace('/\D/', '', $k);
       $slide_slides[] = [
+        'background' => get_post_meta($slide->ID, 'background_' . $index, true),
         'headline' => get_post_meta($slide->ID, 'title_' . $index, true),
         'subtitle' => get_post_meta($slide->ID, 'subtitle_' . $index, true),
         'images' => $images,
@@ -29,7 +30,7 @@
 <div class="guido-stepper-container">
   <div class="guido-stepper">
     <?php foreach($slide_slides as $slide_slide) : ?>
-    <div class="guido-stepper-slide">
+    <div class="guido-stepper-slide" style="background: <?php echo $slide_slide['background']; ?>;">
       <h2 class="guido-stepper-headline"><?php echo $slide_slide['headline']; ?></h2>
       <h3 class="guido-stepper-subtitle"><?php echo $slide_slide['subtitle']; ?></h3>
 
@@ -41,11 +42,42 @@
       <?php endforeach; ?>
     </div>
     <?php endforeach; ?>
+
+    <!-- 1st SLIDE -->
     <div class="guido-stepper-slide form-slide">
-      <h2 class="guido-stepper-headline">Form Slide</h2>
+      <h2 class="guido-stepper-headline"><?php echo get_post_meta($slide->ID, '1st_form_headline', true); ?></h2>
+      <h3 class="guido-stepper-subtitle"><?php echo get_post_meta($slide->ID, '1st_form_subtitle', true); ?></h3>
 
       <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
-        <input type="hidden" name="to" value="<?php echo $atts['to']; ?>" />
+        <input type="hidden" name="to" value="<?php echo get_post_meta($slide->ID, 'to', true); ?>" />
+        <?php
+          $inputs = new WP_Query([
+            'post_type' => 'gs_inputs',
+            'limit' => 9999,
+          ]);
+
+          foreach($inputs->posts as $index => $input) :
+          if(get_post_meta($input->ID, 'belongs_to', true) === '1st_slide') :
+        ?>
+          <div class="form-slide-input <?php echo ($index % 2 === 0) ? 'even' : 'odd'; ?>">
+            <label><?php echo $input->post_title; ?> *</label>
+            <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->ID; ?>" />
+          </div> <!-- .form-slide-input -->
+        <?php endif; endforeach; ?>
+
+        <button type="submit" class="guido-stepper-submit-button"><?php echo get_post_meta($slide->ID, '1st_form_submit', true); ?></button>
+      </form>
+
+      <img src="<?php echo plugin_dir_url(__FILE__) . '/../../img/loading.svg'; ?>" class="gs-loading" alt="">
+    </div> <!-- .form-slide -->
+
+    <!-- 2nd SLIDE -->
+    <div class="guido-stepper-slide form-slide">
+      <h2 class="guido-stepper-headline"><?php echo get_post_meta($slide->ID, '2nd_form_headline', true); ?></h2>
+      <h3 class="guido-stepper-subtitle"><?php echo get_post_meta($slide->ID, '2nd_form_subtitle', true); ?></h3>
+
+      <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
+        <input type="hidden" name="to" value="<?php echo get_post_meta($slide->ID, 'to', true); ?>" />
         <?php
           $inputs = new WP_Query([
             'post_type' => 'gs_inputs',
@@ -53,18 +85,21 @@
           ]);
 
           foreach($inputs->posts as $input) :
+          if(get_post_meta($input->ID, 'belongs_to', true) === '2nd_slide') :
         ?>
           <div class="form-slide-input">
             <label><?php echo $input->post_title; ?> *</label>
             <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->ID; ?>" />
           </div> <!-- .form-slide-input -->
-        <?php endforeach; ?>
+        <?php endif; endforeach; ?>
 
-        <button type="submit" class="guido-stepper-submit-button"><?php echo $atts['1st_slide_submit']; ?></button>
+        <button type="submit" class="guido-stepper-submit-button"><?php echo get_post_meta($slide->ID, '2nd_form_submit', true); ?></button>
       </form>
 
       <img src="<?php echo plugin_dir_url(__FILE__) . '/../../img/loading.svg'; ?>" class="gs-loading" alt="">
     </div> <!-- .form-slide -->
+
+
     <div class="guido-stepper-slide thank-you-slide">
       <h2>Thank you</h2>
     </div>
