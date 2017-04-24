@@ -136,7 +136,7 @@ class Wp_Guido_Stepper_Public {
 				add_post_meta($post_id, 'input_' . $input['name'], $input['value']);
 			}
 
-			add_post_meta($post_id, 'slide_values', json_encode($values));
+			add_post_meta($post_id, 'slide_values', json_encode($values, JSON_UNESCAPED_UNICODE));
 		}
 		
 		$message = '';

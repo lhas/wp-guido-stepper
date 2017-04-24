@@ -48,7 +48,7 @@
       <h2 class="guido-stepper-headline"><?php echo get_post_meta($slide->ID, '1st_form_headline', true); ?></h2>
       <h3 class="guido-stepper-subtitle"><?php echo get_post_meta($slide->ID, '1st_form_subtitle', true); ?></h3>
 
-      <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
+      <form class="guido-stepper-form" data-step="1st" data-slide="<?php echo $slide->post_title; ?>">
         <input type="hidden" name="to" value="<?php echo get_post_meta($slide->ID, 'to', true); ?>" />
         <?php
           $inputs = new WP_Query([
@@ -76,8 +76,7 @@
       <h2 class="guido-stepper-headline"><?php echo get_post_meta($slide->ID, '2nd_form_headline', true); ?></h2>
       <h3 class="guido-stepper-subtitle"><?php echo get_post_meta($slide->ID, '2nd_form_subtitle', true); ?></h3>
 
-      <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
-        <input type="hidden" name="to" value="<?php echo get_post_meta($slide->ID, 'to', true); ?>" />
+      <form class="guido-stepper-form" data-step="2nd" data-slide="<?php echo $slide->post_title; ?>">
         <?php
           $inputs = new WP_Query([
             'post_type' => 'gs_inputs',

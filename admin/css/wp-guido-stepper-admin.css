@@ -113,7 +113,6 @@
 	display: block;
 }
 
-.type-gs_registrations .row-actions .edit,
 .type-gs_registrations .row-actions .view,
 .type-gs_registrations .row-actions .inline {
 	display: none;

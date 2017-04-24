@@ -360,8 +360,27 @@ class Wp_Guido_Stepper_Admin {
 			];
 		}
 
+		// 4.1) Set one field to store slides selected values
+		$registration_fields[] = [
+			'id' => 'slide_values',
+			'label' => 'Slide Values',
+			'type' => 'slide_values',
+			'add_column'  => false,
+		];
+
 		// 5) Set fields for registration metabox
 		$registration_metabox->set_fields($registration_fields);
+	}
+
+	public function slide_values_fields($type, $id, $current, $options) {
+		if ( 'slide_values' == $type ) {
+			echo sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" />', $id, esc_attr( $current ) );
+			$content = json_decode($current);
+			foreach($content as $c) {
+				echo '<p><strong>' . $c->headline . '</strong></p>';
+				echo '<p>' . $c->value . '</p>';
+			}
+    }
 	}
 
 	public function register_menu_pages() {

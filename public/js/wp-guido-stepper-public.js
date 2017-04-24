@@ -27,20 +27,33 @@
 			});
 
 			$(guidoStepper).find('.guido-stepper-form').on('submit', function() {
-				var data = {
-					action: 'stepper_submit',
-					slide: $(this).data('slide'),
-					values: values,
-					form: $(this).serializeArray()
-				};
+				var step = $(this).data('step');
 
-				$(this).hide();
-				$(guidoStepper).find('.gs-loading').show();
-				$.post(ajax_object.ajax_url, data, function(response) {
-					$(guidoStepper).find('.gs-loading').hide();
-					$(guidoStepper).find('.guido-stepper-form').show();
-					$(guidoStepper).slick('slickNext');
-				});
+				switch(step) {
+					case '1st':
+						window.localStorage.setItem('form', JSON.stringify($(this).serializeArray()));
+						$(guidoStepper).slick('slickNext');
+					break;
+					case '2nd':
+						var form = JSON.parse(window.localStorage.getItem('form'));
+						form = form.concat($(this).serializeArray());
+
+						var data = {
+							action: 'stepper_submit',
+							slide: $(this).data('slide'),
+							values: values,
+							form: form
+						};
+
+						$(this).hide();
+						$(guidoStepper).find('.gs-loading').show();
+						$.post(ajax_object.ajax_url, data, function(response) {
+							$(guidoStepper).find('.gs-loading').hide();
+							$(guidoStepper).find('.guido-stepper-form').show();
+							$(guidoStepper).slick('slickNext');
+						});
+					break;
+				}
 				return false;
 			});
 
