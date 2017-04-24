@@ -158,10 +158,6 @@ class Wp_Guido_Stepper_Admin {
 				'rewrite' => ['slug' => 'stepper-registration'],
 				'menu_position' => 1000,
 				'supports' => array('title'),
-				'capabilities' => array(
-					'create_posts' => 'do_not_allow', // false < WP 4.5, credit @Ewout
-				),
-				'map_meta_cap' => false,
 			]
 		);
 	}
@@ -200,15 +196,32 @@ class Wp_Guido_Stepper_Admin {
 							'tel'   => 'Phone',
 							'number'   => 'Number'
 					)
-				)
+				),
+				array(
+					'id'          => 'belongs_to',
+					'label'       => __( 'Belongs To', 'wp-guido-stepper' ),
+					'type'        => 'select',
+					'add_column'  => true,
+					'options'       => array(
+							'1st_slide'   => '1st Form Slide',
+							'2nd_slide'   => '2nd Form Slide',
+					)
+				),
 			)
 		);
 	}
 
 	public function slide_fields() {
 		$slides_metabox = new Odin_Metabox(
-				'slide_settings',
-				'Slide Settings',
+				'slides',
+				'Slides',
+				'gs_slides',
+				'normal',
+				'high'
+		);
+		$settings_metabox = new Odin_Metabox(
+				'settings',
+				'Settings',
 				'gs_slides',
 				'normal',
 				'high'
@@ -216,11 +229,22 @@ class Wp_Guido_Stepper_Admin {
 		
 		$slides_limit = 10;
 		$slides_fields = [];
+		$settings_fields = [];
 
 		for($i = 1; $i <= $slides_limit; $i++) {
 			$slides_fields[] = array(
+				'id'          => 'background_' . $i, // Obrigatório
+				'label'       => 'Background #' . $i, // Obrigatório
+				'type'        => 'color', // Obrigatório
+			);
+			$slides_fields[] = array(
 				'id'          => 'title_' . $i, // Obrigatório
 				'label'       => 'Headline #' . $i, // Obrigatório
+				'type'        => 'text', // Obrigatório
+			);
+			$slides_fields[] = array(
+				'id'          => 'subtitle_' . $i, // Obrigatório
+				'label'       => 'Subtitle #' . $i, // Obrigatório
 				'type'        => 'text', // Obrigatório
 			);
 			$slides_fields[] = array(
@@ -229,8 +253,63 @@ class Wp_Guido_Stepper_Admin {
 				'type'        => 'image_plupload', // Obrigatório
 			);
 		}
+	
+		$settings_fields[] = array(
+			'id'          => 'to', // Obrigatório
+			'label'       => 'To', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => 'submit_button_background', // Obrigatório
+			'label'       => 'Submit Button - Background Color', // Obrigatório
+			'type'        => 'color', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => 'submit_button_color', // Obrigatório
+			'label'       => 'Submit Button - Text Color', // Obrigatório
+			'type'        => 'color', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_headline', // Obrigatório
+			'label'       => '1st Form - Headline', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_subtitle', // Obrigatório
+			'label'       => '1st Form - Subtitle', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '1st_form_submit', // Obrigatório
+			'label'       => '1st Form - Submit Text', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_headline', // Obrigatório
+			'label'       => '2nd Form - Headline', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_subtitle', // Obrigatório
+			'label'       => '2nd Form - Subtitle', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
+	
+		$settings_fields[] = array(
+			'id'          => '2nd_form_submit', // Obrigatório
+			'label'       => '2nd Form - Submit Text', // Obrigatório
+			'type'        => 'text', // Obrigatório
+		);
 
 		$slides_metabox->set_fields($slides_fields);
+		$settings_metabox->set_fields($settings_fields);
 	}
 
 	public function registration_fields() {
@@ -277,20 +356,31 @@ class Wp_Guido_Stepper_Admin {
 				'id' => 'input_' . $input->ID,
 				'label' => $input->post_title,
 				'type' => 'text',
-				'add_column'  => true,
+				'add_column'  => false,
 			];
 		}
 
 		// 4.1) Set one field to store slides selected values
-			$registration_fields[] = [
-				'id' => 'slide_values',
-				'label' => 'Slide Values',
-				'type' => 'text',
-				'add_column'  => true,
-			];
+		$registration_fields[] = [
+			'id' => 'slide_values',
+			'label' => 'Slide Values',
+			'type' => 'slide_values',
+			'add_column'  => false,
+		];
 
 		// 5) Set fields for registration metabox
 		$registration_metabox->set_fields($registration_fields);
+	}
+
+	public function slide_values_fields($type, $id, $current, $options) {
+		if ( 'slide_values' == $type ) {
+			echo sprintf( '<input type="hidden" id="%1$s" name="%1$s" value="%2$s" />', $id, esc_attr( $current ) );
+			$content = json_decode($current);
+			foreach($content as $c) {
+				echo '<p><strong>' . $c->headline . '</strong></p>';
+				echo '<p>' . $c->value . '</p>';
+			}
+    }
 	}
 
 	public function register_menu_pages() {
@@ -327,20 +417,6 @@ class Wp_Guido_Stepper_Admin {
         'edit.php?post_type=gs_registrations',
         ''
     );
-	}
-
-	public function slide_values_column_values($slide_values) {
-		$response = '';
-		$slide_values_decoded = json_decode($slide_values);
-
-		if(!empty($slide_values_decoded)) {
-			foreach($slide_values_decoded as $slide_value) {
-				$response .= '<strong>' . $slide_value->headline . '</strong>';
-				$response .= '<p>' . $slide_value->value . '</p>';
-			}
-		}
-
-		return $response;
 	}
 
 }

@@ -162,7 +162,7 @@ class Wp_Guido_Stepper {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'remove_post_type_menu' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_custom_fields' );
-		$this->loader->add_filter( 'admin_post_column_value_gs_registrations_slide_values', $plugin_admin, 'slide_values_column_values' );
+		$this->loader->add_action( 'odin_metabox_field_registration_settings', $plugin_admin, 'slide_values_fields', 1, 4 );
 
 	}
 

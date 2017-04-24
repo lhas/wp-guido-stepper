@@ -3,42 +3,49 @@
   width: 100%;
   box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
   border-radius: 4px;
-  padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   float: left;
 }
 .form-slide-input {
   display: inline-block;
-  width: 100%;
+  width: 48%;
   margin-bottom: 20px;
+}
+.form-slide-input.even {
+  margin-right: 3%;
 }
 .guido-stepper-headline {
   font-weight: bold;
   margin-top: 20px;
-  margin-left: 15px;
+  margin-bottom: 0px;
+  font-size: 24px;
+}
+.guido-stepper-subtitle {
+  font-weight: 300;
+  margin-top: 0px;
+  padding-top: 0px;
+  font-size: 18px;
+}
+.guido-stepper-slide {
+  padding: 10px;
 }
 .guido-stepper-slide-item {
   float: left;
-  margin-left: 15px;
   margin-right: 15px;
   box-shadow: none !important;
-  width: 150px;
+  width: 130px;
 }
 .guido-stepper-slide-item img {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 130px;
   display: inline-block;
   box-shadow: 0 0 5px rgba(0,0,0,.5) !important;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-.form-slide-input {
-  padding-left: 15px;
-  padding-right: 15px;
-}
 .guido-stepper-submit-button {
-  margin-left: 15px;
+  width: 100%;
   margin-bottom: 20px;
 }
 .guido-stepper-slide-item-title {
@@ -48,8 +55,8 @@
   color: #FFF;
   background: rgba(128,147,1,.84);
   word-break: break-all;
-  font-size: 13px;
-  padding: 5px;
+  font-size: 12px;
+  padding: 4px;
   box-shadow: 0 0 5px rgba(0,0,0,.5) !important;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -71,8 +78,6 @@
   text-align: center;
 }
 .thank-you-slide h2 {
-  height: 350px;
-  line-height: 350px;
   font-size: 40px;
   font-weight: bold;
 }
@@ -82,8 +87,14 @@
 .guido-stepper-slide.form-slide .gs-loading {
   position: absolute;
   left: 50%;
-  top: 150px;
+  top: 130px;
   margin-left: -40px;
   margin-top: -40px;
   display: none;
+}
+
+@media only screen and (max-width : 768px) {
+  .form-slide-input {
+    width: 100%;
+  }
 }
