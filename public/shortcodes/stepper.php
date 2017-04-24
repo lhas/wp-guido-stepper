@@ -45,6 +45,7 @@
       <h2 class="guido-stepper-headline">Form Slide</h2>
 
       <form class="guido-stepper-form" data-slide="<?php echo $slide->post_title; ?>">
+        <input type="hidden" name="to" value="<?php echo $atts['to']; ?>" />
         <?php
           $inputs = new WP_Query([
             'post_type' => 'gs_inputs',
@@ -59,7 +60,7 @@
           </div> <!-- .form-slide-input -->
         <?php endforeach; ?>
 
-        <button type="submit" class="guido-stepper-submit-button">Submit</button>
+        <button type="submit" class="guido-stepper-submit-button"><?php echo $atts['1st_slide_submit']; ?></button>
       </form>
 
       <img src="<?php echo plugin_dir_url(__FILE__) . '/../../img/loading.svg'; ?>" class="gs-loading" alt="">
@@ -69,3 +70,10 @@
     </div>
   </div> <!-- .guido-stepper -->
 </div> <!-- .guido-stepper-container -->
+
+<style type="text/css">
+.guido-stepper-submit-button {
+  color: <?php echo $atts['submit_button_color']; ?> !important;
+  background: <?php echo $atts['submit_button_background']; ?> !important;
+}
+</style>
