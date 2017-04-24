@@ -292,14 +292,6 @@ class Wp_Guido_Stepper_Admin {
 			];
 		}
 
-		// 4.1) Set one field to store slides selected values
-			$registration_fields[] = [
-				'id' => 'slide_values',
-				'label' => 'Slide Values',
-				'type' => 'text',
-				'add_column'  => true,
-			];
-
 		// 5) Set fields for registration metabox
 		$registration_metabox->set_fields($registration_fields);
 	}
@@ -338,20 +330,6 @@ class Wp_Guido_Stepper_Admin {
         'edit.php?post_type=gs_registrations',
         ''
     );
-	}
-
-	public function slide_values_column_values($slide_values) {
-		$response = '';
-		$slide_values_decoded = json_decode($slide_values);
-
-		if(!empty($slide_values_decoded)) {
-			foreach($slide_values_decoded as $slide_value) {
-				$response .= '<strong>' . $slide_value->headline . '</strong>';
-				$response .= '<p>' . $slide_value->value . '</p>';
-			}
-		}
-
-		return $response;
 	}
 
 }
