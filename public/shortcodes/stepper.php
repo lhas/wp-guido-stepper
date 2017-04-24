@@ -100,7 +100,7 @@
 
 
     <div class="guido-stepper-slide thank-you-slide">
-      <h2>Thank you</h2>
+      <h2><?php echo ($atts['thank_you']) ? $atts['thank_you'] : 'Thank you!' ?></h2>
     </div>
   </div> <!-- .guido-stepper -->
 </div> <!-- .guido-stepper-container -->
