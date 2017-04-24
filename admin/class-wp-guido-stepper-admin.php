@@ -356,7 +356,7 @@ class Wp_Guido_Stepper_Admin {
 				'id' => 'input_' . $input->ID,
 				'label' => $input->post_title,
 				'type' => 'text',
-				'add_column'  => true,
+				'add_column'  => false,
 			];
 		}
 
