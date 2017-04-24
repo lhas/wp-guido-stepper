@@ -119,7 +119,7 @@ class Wp_Guido_Stepper_Public {
 		$slide = $_POST['slide'];
 		$values = $_POST['values'];
 		$form = $_POST['form'];
-		$admin_email = get_bloginfo('admin_email');
+		$admin_email = $_POST['to'];
 
 		$post_id = wp_insert_post(array (
 				'post_type' => 'gs_registrations',
