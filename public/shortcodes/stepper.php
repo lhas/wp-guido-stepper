@@ -11,7 +11,7 @@
 
       foreach($images_id as $image_id) {
         $images[] = [
-          'url' => wp_get_attachment_url($image_id),
+          'url' => wp_get_attachment_image_src($image_id, 'thumbnail'),
           'title' => get_the_title($image_id),
         ];
       }
@@ -33,7 +33,7 @@
 
       <?php foreach($slide_slide['images'] as $image) : ?>
       <a href="#" class="guido-stepper-slide-item" data-headline="<?php echo $slide_slide['headline']; ?>" data-value="<?php echo $image['title']; ?>">
-        <img src="<?php echo $image['url']; ?>" />
+        <img src="<?php echo $image['url'][0]; ?>" />
         <span class="guido-stepper-slide-item-title"><?php echo $image['title']; ?></span>
       </a>
       <?php endforeach; ?>
