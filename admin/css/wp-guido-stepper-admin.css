@@ -112,3 +112,13 @@
 	border-top: 1px solid #dfdfdf;
 	display: block;
 }
+
+.type-gs_registrations .row-actions .edit,
+.type-gs_registrations .row-actions .view,
+.type-gs_registrations .row-actions .inline {
+	display: none;
+}
+
+.post-type-gs_registrations .page-title-action {
+	display: none;
+}

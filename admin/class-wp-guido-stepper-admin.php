@@ -158,10 +158,6 @@ class Wp_Guido_Stepper_Admin {
 				'rewrite' => ['slug' => 'stepper-registration'],
 				'menu_position' => 1000,
 				'supports' => array('title'),
-				'capabilities' => array(
-					'create_posts' => 'do_not_allow', // false < WP 4.5, credit @Ewout
-				),
-				'map_meta_cap' => false,
 			]
 		);
 	}
