@@ -19,6 +19,7 @@
       $index = preg_replace('/\D/', '', $k);
       $slide_slides[] = [
         'headline' => get_post_meta($slide->ID, 'title_' . $index, true),
+        'subtitle' => get_post_meta($slide->ID, 'subtitle_' . $index, true),
         'images' => $images,
       ];
     }
@@ -30,6 +31,7 @@
     <?php foreach($slide_slides as $slide_slide) : ?>
     <div class="guido-stepper-slide">
       <h2 class="guido-stepper-headline"><?php echo $slide_slide['headline']; ?></h2>
+      <h3 class="guido-stepper-subtitle"><?php echo $slide_slide['subtitle']; ?></h3>
 
       <?php foreach($slide_slide['images'] as $image) : ?>
       <a href="#" class="guido-stepper-slide-item" data-headline="<?php echo $slide_slide['headline']; ?>" data-value="<?php echo $image['title']; ?>">

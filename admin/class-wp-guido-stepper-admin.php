@@ -234,6 +234,11 @@ class Wp_Guido_Stepper_Admin {
 				'type'        => 'text', // Obrigatório
 			);
 			$slides_fields[] = array(
+				'id'          => 'subtitle_' . $i, // Obrigatório
+				'label'       => 'Subtitle #' . $i, // Obrigatório
+				'type'        => 'text', // Obrigatório
+			);
+			$slides_fields[] = array(
 				'id'          => 'slide_' . $i, // Obrigatório
 				'label'       => 'Slide #' . $i, // Obrigatório
 				'type'        => 'image_plupload', // Obrigatório
