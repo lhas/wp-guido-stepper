@@ -200,7 +200,17 @@ class Wp_Guido_Stepper_Admin {
 							'tel'   => 'Phone',
 							'number'   => 'Number'
 					)
-				)
+				),
+				array(
+					'id'          => 'belongs_to',
+					'label'       => __( 'Belongs To', 'wp-guido-stepper' ),
+					'type'        => 'select',
+					'add_column'  => true,
+					'options'       => array(
+							'1st_slide'   => '1st Form Slide',
+							'2nd_slide'   => '2nd Form Slide',
+					)
+				),
 			)
 		);
 	}

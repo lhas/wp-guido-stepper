@@ -52,8 +52,8 @@
           foreach($inputs->posts as $input) :
         ?>
           <div class="form-slide-input">
-            <label><?php echo $input->post_title; ?></label>
-            <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->ID; ?>" placeholder="<?php echo $input->post_title; ?>" />
+            <label><?php echo $input->post_title; ?> *</label>
+            <input type="<?php echo get_post_meta($input->ID, 'type', true); ?>" required name="<?php echo $input->ID; ?>" />
           </div> <!-- .form-slide-input -->
         <?php endforeach; ?>
 
